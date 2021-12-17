@@ -29,7 +29,7 @@ include "ejercicio1.php";
         }
 
         function __toString(){
-            return parent::mostrar() . " nombre Empresa: " . $this->nombreEmpresa;
+            return parent::__toString() . " nombre Empresa: " . $this->nombreEmpresa;
         }
     }
 ?>
