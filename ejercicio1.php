@@ -58,5 +58,9 @@
         function mostrar(){
             return "nombre: " . $this->nombre . " dni: " . $this->dni . " sexo: " . $this->sexo . " peso: " . $this->peso . " altura: " . $this->altura;
         }
+
+        function __toString(){
+            return "nombre: " . $this->nombre . " dni: " . $this->dni . " sexo: " . $this->sexo . " peso: " . $this->peso . " altura: " . $this->altura;
+        }
     }
 ?>
