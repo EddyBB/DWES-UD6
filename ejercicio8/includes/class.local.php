@@ -6,7 +6,7 @@
         private int $numeroPlantas;
         private Dimensiones $dimensiones;
 
-        function __construct($ciudad,$calle,$numeroPlantas,$dimensiones){
+        public function __construct($ciudad,$calle,$numeroPlantas,$dimensiones){
             if(is_string($ciudad)){
                 $this->ciudad = $ciudad;
             } elseif(is_string($calle)){
@@ -23,21 +23,20 @@
             
         }
 
-        function __get($atributo){
+        public function __get($atributo){
             return $this->$atributo;
         }
 
-        function getDimensiones(){
+        public function getDimensiones(){
             return $this->dimensiones;
         }
 
-        function __toString(){
+        public function __toString(){
             return "<p>Ciudad: " . $this->ciudad . "<br></p> " . " <p>Calle: " . $this->calle . "<br></p>" . " <p>Plantas: " . $this->numeroPlantas . "<br></p>" . " <p>Dimensiones: " . $this->dimensiones . "<br></p>";
         }
 
-        function __clone(){
-            $copyDimension = clone $this->dimensiones;
+        public function __clone(){
+            $this->dimensiones = clone $this->dimensiones;
         }
     }
-
 ?>

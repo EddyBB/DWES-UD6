@@ -4,7 +4,10 @@
         private string $razonSocial;
         private string $numLicencia;
 
-        function __construct($razonSocial, $numLicencia){
+        public function __construct($ciudad,$calle,$numeroPlantas,$dimensiones,$razonSocial, $numLicencia){
+
+            parent::__construct($ciudad,$calle,$numeroPlantas,$dimensiones);
+
             if(is_string($razonSocial)){
                 $this->razonSocial = $razonSocial;
             } elseif(is_string($numLicencia)){
@@ -16,7 +19,7 @@
             }
         }
 
-        function __toString(){
+        public function __toString(){
             return "<p>" . parent::__toString() . "</p>" . " <p>Razon Social: " . $this->razonSocial . "<br></p>" . " <p>Número de Licencia: " . $this->numLicencia . "<br></p>";
         }
     }

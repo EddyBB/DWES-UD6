@@ -5,7 +5,7 @@
         private float $ancho;
         private float $largo;
 
-        function __construct($alto,$ancho,$largo){
+        public function __construct($alto,$ancho,$largo){
             $this->alto = $alto;
             $this->ancho = $ancho;
             $this->largo = $largo;
@@ -13,7 +13,7 @@
         }
 
         public function __get($atributo){
-            return "El valor del atributo es: " . $this->$atributo;
+            return $this->$atributo;
         }
 
         public function __set($atributo, $valor){
@@ -22,11 +22,13 @@
                 $this->$atributo=$valor;
             else{
                 echo "El valor no puede ser menor a uno";
+                die();
                 echo "<br>";
             }
         }
 
-        function __toString(){
+        public function __toString(){
             return "alto = " . $this->alto . ", ancho= " . $this->ancho . ", largo= " . $this->largo;
         }
     }
+?>
