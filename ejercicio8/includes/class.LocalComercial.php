@@ -10,7 +10,13 @@
 
             if(is_string($razonSocial)){
                 $this->razonSocial = $razonSocial;
-            } elseif(is_string($numLicencia)){
+            } else{
+                echo "Error";
+                die();
+                echo "<br>";
+            }
+            
+            if(is_string($numLicencia)){
                 $this->numLicencia = $numLicencia;
             } else {
                 echo "Error";

@@ -9,11 +9,29 @@
         public function __construct($ciudad,$calle,$numeroPlantas,$dimensiones){
             if(is_string($ciudad)){
                 $this->ciudad = $ciudad;
-            } elseif(is_string($calle)){
+            } else{
+                echo "Error";
+                die();
+                echo "<br>";
+            }
+            
+            if(is_string($calle)){
                 $this->calle = $calle;
-            } elseif(is_integer($numeroPlantas) && $numeroPlantas >= 1 && $numeroPlantas <= 10){
+            } else{
+                echo "Error";
+                die();
+                echo "<br>";
+            }
+
+            if(is_integer($numeroPlantas) && $numeroPlantas >= 1 && $numeroPlantas <= 10){
                 $this->numeroPlantas = $numeroPlantas;
-            } elseif($dimensiones instanceof Dimensiones){
+            } else{
+                echo "Error";
+                die();
+                echo "<br>";
+            }
+            
+            if($dimensiones instanceof Dimensiones){
                 $this->dimensiones = $dimensiones;
             } else{
                 echo "Error";
