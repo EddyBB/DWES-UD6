@@ -18,33 +18,15 @@
 
         public function __set($atributo, $valor){
 
-            switch($atributo){
-                    case "alto":
-                        if(is_float($valor)>1)
-                            $this->$atributo=$valor;
-                        else
-                            echo "El valor no puede ser menor a uno";
-                            echo "<br>";
-                        break;
-                    case "ancho": 
-                        if(is_float($valor)>1)
-                            $this->$atributo=$valor;
-                        else
-                            echo "El valor no puede ser menor a uno";
-                            echo "<br>";
-                        break;
-                    case "largo":
-                        if(is_float($valor)>1)
-                            $this->$atributo=$valor;
-                        else
-                            echo "El valor no puede ser menor a uno";
-                            echo "<br>";
-                        break;
-
-            } 
+            if(is_float($valor) && $valor > 1)
+                $this->$atributo=$valor;
+            else{
+                echo "El valor no puede ser menor a uno";
+                echo "<br>";
+            }
         }
 
         function __toString(){
-            return "alto= " . $this->alto . ",ancho= " . $this->ancho . ",largo= " . $this->largo;
+            return "alto = " . $this->alto . ", ancho= " . $this->ancho . ", largo= " . $this->largo;
         }
     }
