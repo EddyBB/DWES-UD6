@@ -17,12 +17,12 @@
             $this->$atributo=$valor;
         }
 
-        public function __circula(){
-            return "El vehículo está circulando";
+        public function circula(){
+            echo "El vehículo está circulando";
         }
 
-        public function __añadir_persona(){
-
+        public function anyadir_persona($pesoPersona){
+            $this->peso += $pesoPersona;
         }
     }
 
