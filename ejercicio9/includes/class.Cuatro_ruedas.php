@@ -20,6 +20,15 @@
         }
     
         public function __set($atributo, $valor){
-            $this->$atributo = $valor;
+            if (property_exists(get_Class(),$atributo)){
+                $this->$atributo = $valor;
+            } else {
+                parent::__set($atributo,$valor);
+            }
+        }
+
+        function anyadir_persona($pesoPersona){
+            $this->peso += $pesoPersona;
+            
         }
     }

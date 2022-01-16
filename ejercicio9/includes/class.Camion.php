@@ -22,8 +22,12 @@ class Camion extends Cuatro_ruedas {
         }
     }
 
-    public function __set($name, $valor){
-        $this->$name = $valor;
+    public function __set($atributo, $valor){
+        if (property_exists(get_Class(),$atributo)){
+            $this->$atributo = $valor;
+        } else {
+            parent::__set($atributo,$valor);
+        }
     }
 
 }

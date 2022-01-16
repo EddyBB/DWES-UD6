@@ -3,16 +3,10 @@
     class Coche extends Cuatro_ruedas {
         private int $numero_cadenas_nieve;
 
-        function __construct($color, $peso, $numero_cadenas_nieve, $numeroPuertas){
+        function __construct($color, $peso, $numero_puertas, $numero_cadenas_nieve){
+            parent::__construct($color, $peso, $numero_puertas);
             $this->numero_cadenas_nieve = $numero_cadenas_nieve;
-            parent::__construct($color, $peso, $numeroPuertas);
-        }
-
-        public function anyadir_persona($pesoPersona){
-            parent::anyadir_persona($pesoPersona);
-            if ($this->peso >= 1500 && $this->numero_cadenas_nieve <= 2) {
-                return "Atención, ponga 4 cadenas para la nieve.";
-            }
+            
         }
 
         public function anyadir_cadenas_nieve($num){
@@ -32,7 +26,19 @@
         }
 
         public function __set($atributo, $valor){
-            $this->$atributo = $valor;
+            if (property_exists(get_Class(),$atributo)){
+                $this->$atributo = $valor;
+            } else {
+                parent::__set($atributo,$valor);
+            }
+        }
+
+        public function anyadir_persona($pesoPersona){
+            parent::anyadir_persona($pesoPersona);
+            if ($this->peso >= 1500 && $this->numero_cadenas_nieve <= 2) {
+                return "Atención, ponga 4 cadenas para la nieve.";
+            }
+            
         }
 
     }

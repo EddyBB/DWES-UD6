@@ -1,5 +1,7 @@
 <?php
-    include_once "./includes/class.Vehiculo.php";
+    spl_autoload_register(function($name) {
+        include_once('includes/class.' . $name . '.php');
+    });
 
     $vehiculo1 = new Vehiculo("Rojo", 450);
     $vehiculo1->circula();
