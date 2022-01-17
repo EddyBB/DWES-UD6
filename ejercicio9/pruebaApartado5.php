@@ -5,7 +5,7 @@
     });
 
     //crea un coche verde de 2100 kg con 4 puertas.
-    $coche1 = new Coche("verde", 2100,2,2);
+    $coche1 = new Coche("verde", 2100,2,0);
 
     //Añade 2 cadenas para la nieve y una persona de 80 kg.
     $coche1->anyadir_cadenas_nieve(2);
@@ -21,6 +21,6 @@
     $coche1->setColor("negro");
 
     //Muestra todos los atributos del coche y el número de veces que se cambia el color con el método ver_atributo.
-    $coche1->ver_atributo($coche1);
+    Vehiculo::ver_atributo($coche1);
 
 ?>

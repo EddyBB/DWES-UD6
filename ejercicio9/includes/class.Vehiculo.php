@@ -1,6 +1,6 @@
 <?php
 
-    abstract class Vehiculo{
+    abstract class Vehiculo implements IVehiculo{
         private string $color;
         private float $peso;
         protected static int $numero_cambio_color = 0;
@@ -15,7 +15,17 @@
         }
 
         public function __set($atributo, $valor){
-            $this->$atributo=$valor;
+            switch ($atributo) {
+                case 'color':
+                    $this->setColor($valor);
+                    break;
+                case 'peso':
+                    $this->setPeso($valor);
+                    break;
+                default:
+                    $this->$atributo=$valor;
+                    break;
+            }
         }
 
         public function circula(){
@@ -59,11 +69,12 @@
         }
 
         public function setPeso($peso){
-            if(($this->$peso + $peso) <= 2100){
+            if($peso<= 2100){
                 $this->peso += $peso;
             } else{
                 echo "Error, no puede superar los 2.100 Kg";
-                die();
+                echo "<br>";
+                //die();
             }
         }
     }

@@ -10,11 +10,16 @@
         }
 
         public function anyadir_cadenas_nieve($num){
-            $this->numero_cadenas_nieve += $num;
+            $this->numero_cadenas_nieve = $this->numero_cadenas_nieve + $num;
+            
         }
 
         public function quitar_cadenas_nieve($num){
-            $this->numero_cadenas_nieve -= $num;
+            if($this->numero_cadenas_nieve < $num){
+                $this->numero_cadenas_nieve = 0;
+            } else{
+                $this->numero_cadenas_nieve = $this->numero_cadenas_nieve - $num;
+            }
         }
 
         public function __get($valor) {
@@ -36,7 +41,8 @@
         public function anyadir_persona($pesoPersona){
             parent::anyadir_persona($pesoPersona);
             if ($this->peso >= 1500 && $this->numero_cadenas_nieve <= 2) {
-                return "Atención, ponga 4 cadenas para la nieve.";
+                echo "Atención, ponga 4 cadenas para la nieve.";
+                echo "<br>";
             }
             
         }
