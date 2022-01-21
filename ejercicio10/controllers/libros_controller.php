@@ -16,7 +16,7 @@
 
         $id = $_GET['id'];
 
-        $unicoLibro = getLibro($id);
+        $libros = getLibro($id);
         
         include './views/libros_view.php';
     }

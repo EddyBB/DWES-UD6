@@ -22,7 +22,11 @@
         $result = $db->prepare('SELECT titulo, precio FROM libros WHERE id=:id');
         $result->bindParam(":id",$id);
         $result->execute();
+        $libros = array();
+        while ($libro = $result->fetch()) {
+            $libros[] = $libro;
+        }
 
-        return $result->fetch();
+        return $libros;
     }
 ?>
