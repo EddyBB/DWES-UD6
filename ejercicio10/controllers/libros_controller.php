@@ -18,6 +18,6 @@
 
         $libros = getLibro($id);
         
-        include './views/libros_view.php';
+        include './views/unicoLibro_view.php';
     }
 ?>

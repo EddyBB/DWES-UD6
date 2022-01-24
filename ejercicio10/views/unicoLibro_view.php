@@ -10,7 +10,7 @@
         <tr>
             <th>TITULO</th>
             <th>PRECIO</th>
-            
+            <th>ISBN</th>
         </tr>
         
         <?php foreach ($libros as $libro): ?>
@@ -19,8 +19,7 @@
 
                 <td><?php echo $libro['titulo']?></td>
                 <td><?php echo number_format($libro['precio'],2)?></td>
-                
-
+                <td><?php echo $libro['isbn']?></td>
             </tr>
 
         <?php endforeach; ?>
