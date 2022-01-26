@@ -11,11 +11,10 @@
 <body>
     <nav>
         <ul>
-            <li><a href="index.php">Página principal</a></li>
-            <li><a href="create.php">Nuevo elemento</a></li>
-            <li><a class="active" href="list.php">Lista elementos</a></li>
-            <li><a href="import.php">Importar elementos</a></li>
-            <li><a href="export.php">Exportar elementos</a></li>
+            <li><a href="?action=todos">Página principal</a></li>
+            <li><a href="#">Nuevo elemento</a></li>
+            <li><a class="active" href="?action=todos">Lista elementos</a></li>
+
         </ul>
     </nav>
     <table class="styled-table">
@@ -42,8 +41,8 @@
                     echo "<td>$producto[precio]</td>";
                     echo "<td>$producto[fechaCreacionProducto]</td>";
                     echo "<td><a href='?action=unicoElemento&id=$producto[id]'>Detalles</a></td>";
-                    echo "<td><a href='edit.php?id=$producto[id]'>Editar</a></td>";
-                    echo "<td><a href='delete.php?id=$producto[id]'>Borrar</a></td>";
+                    echo "<td><a href='?action=update&id=$producto[id]'>Editar</a></td>";
+                    echo "<td><a href='?action=delete&id=$producto[id]'>Borrar</a></td>";
                     echo "</tr>";
                 }
             ?>

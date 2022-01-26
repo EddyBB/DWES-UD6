@@ -24,7 +24,7 @@
                 
 
                 <div class="bio">
-                    <img src="<?php echo "./images/".$juguetes['imagen']; ?>" alt="background" class="bg"><!--aquí va el link a la imagen-->
+                    <img src="<?php echo "images/" . $juguetes['imagen']; ?>" alt="background" class="bg"><!--aquí va el link a la imagen-->
                     <div>
                         <h3><?php echo $juguetes["nombreProducto"] ?></h3><!--aquí va el valor del texto 1-->
                         <p><?php echo $juguetes["modelo"] ?></p><!-- aquí va el valor del texto 2--> 
