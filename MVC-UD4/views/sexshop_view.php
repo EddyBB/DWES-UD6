@@ -12,7 +12,7 @@
     <nav>
         <ul>
             <li><a href="?action=todos">Página principal</a></li>
-            <li><a href="#">Nuevo elemento</a></li>
+            <li><a href="?action=insertar">Nuevo elemento</a></li>
             <li><a class="active" href="?action=todos">Lista elementos</a></li>
 
         </ul>

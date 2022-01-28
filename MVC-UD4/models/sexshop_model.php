@@ -107,4 +107,5 @@
         }
         $conexion=null;
     }
+    //insertaElemento("otto","unico","elmejor",12,12,"12-10-12","otto.png");
 ?>

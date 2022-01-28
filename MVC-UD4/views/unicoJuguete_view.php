@@ -11,11 +11,9 @@
     <body>
         <nav>
             <ul>
-                <li><a href="index.php">Página principal</a></li>
-                <li><a href="create.php">Nuevo elemento</a></li>
-                <li><a class="active" href="list.php">Lista elementos</a></li>
-                <li><a href="import.php">Importar elementos</a></li>
-                <li><a href="export.php">Exportar elementos</a></li>
+            <li><a href="?action=todos">Página principal</a></li>
+                <li><a href="?action=insertar">Nuevo elemento</a></li>
+                <li><a class="active" href="?action=todos">Lista elementos</a></li>
             </ul>
         </nav>  
 

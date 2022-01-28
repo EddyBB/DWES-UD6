@@ -20,11 +20,81 @@ function unicoElemento(){
 function insertar(){
     require './models/sexshop_model.php';
 
-    $juguetes = insertaElemento($nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
+    $action = htmlentities($_SERVER['PHP_SELF']);
+    $sexshop = [];
+    $sexshop["id"] = "";
+    $sexshop["nombreProducto"]="";
+    $sexshop["modelo"]="";
+    $sexshop["descripcion"]="";
+    $sexshop["precio"]="";
+    $sexshop["stock"]="";
+    $sexshop["fechaCreacionProducto"]="";
+    $sexshop["imagen"]="";
+    $errorInsercion = "";
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        $nombreProducto = $_POST["nombreProducto"];
+        $nombreProducto = strip_tags($nombreProducto);
+        $nombreProducto = stripslashes($nombreProducto);
+        $nombreProducto = htmlspecialchars($nombreProducto);
+
+        $modelo = $_POST["modelo"];
+        $modelo = strip_tags($modelo);
+        $modelo = stripslashes($modelo);
+        $modelo = htmlspecialchars($modelo);
+        
+        $descripcion = $_POST["descripcion"];
+        $descripcion = strip_tags($descripcion);
+        $descripcion = stripslashes($descripcion);
+        $descripcion = htmlspecialchars($descripcion);
+
+        $precio = $_POST["precio"];
+        $stock = $_POST["stock"];
+        $fechaCreacionProducto = $_POST["fechaCreacionProducto"];
+        $imagen = $_FILES["imagen"]["name"];
+        
+
+        $directorioImagen = "images/";
+        $archivoImagen = $directorioImagen . basename($_FILES["imagen"]["name"]);
+        $uploadOk=1;
+        $tipoImagen = strtolower(pathinfo($archivoImagen,PATHINFO_EXTENSION));
+
+        if(empty($_FILES["imagen"]["tmp_name"])){
+            $errorInsercion = "Error, selecciona imagen.";
+        }else {
+            $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+            if($check !== false){
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+            }
+            
+
+            if ($uploadOk == 0) {
+                $errorInsercion = "Error, seleccione una imagen";
+              
+              } else {
+                if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivoImagen)) {
+                    $id=insertaElemento($nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
+                    if($id){
+                        header("location: view.php?id=$id");
+                    } else {
+                        $errorInsercion = "Error de inserción";
+                    }
+                } else {
+                  $errorInsercion = "Lo sentimos, ha ocurrido un error en la subida de imagen.";
+                }
+            }
+        }
+        $juguetes = insertaElemento($nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
+       header("location: sexshop_view.php");
+    }
+
     
     include './views/editSexshop_view.php';
-}
 
+}
 
 function delete(){
     require './models/sexshop_model.php';
@@ -41,6 +111,7 @@ function update(){
     require './models/sexshop_model.php';
 
     $id = $_GET['id'];
+    $action = htmlentities($_SERVER['PHP_SELF']. "?id=$id");
     $sexshop = obtenerElemento($id);
     $imagen = $sexshop['imagen'];
 
@@ -110,16 +181,4 @@ function update(){
     include './views/editSexshop_view.php';
 }
 
-// function vacio(){
-// //     //require './models/sexshop_model.php';
-    
-//     $id = $_GET['id'];
-//     if($id != null){
-//         update();
-        
-//     }else{
-//         include './views/editSexshop_view.php';
-//     }
-
-// }
 ?>
