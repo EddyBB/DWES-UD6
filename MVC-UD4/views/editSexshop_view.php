@@ -14,12 +14,13 @@
         ?>
         <nav>
             <ul>
-                <li><a href="?action=todos">Página principal</a></li>
-                <li><a href="?action=insertar">Nuevo elemento</a></li>
-                <li><a class="active" href="?action=todos">Lista elementos</a></li>
+            <li><a href="?controller=usuarios&action=formulario">Página principal</a></li>
+            <li><a href="?controller=sexshop&action=insertar">Nuevo elemento</a></li>
+            <li><a class="active" href="?controller=sexshop&action=todos">Lista elementos</a></li>
+            <li><a href="?controller=usuarios&action=cerrarSesion">Cerrar Sesión</a></li>
             </ul>
         </nav>
-        <form class="form-register" action="<?php echo $action; ?>" method="POST" enctype="multipart/form-data">
+        <form class="form-register" action="" method="POST" enctype="multipart/form-data">
             <h2 class="form-titulo">Características:</h2>
             <div class="contenedor-inputs">
                 <input type="hidden" name="id" value="<?php echo $sexshop["id"]; ?>"><!--aquí va el id, es hidden por lo tanto no es visible en la web, pero si accesible desde PHP -->

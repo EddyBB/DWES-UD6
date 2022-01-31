@@ -2,9 +2,9 @@
 
     define('CONTROLLERS_FOLDER', 'controllers/');
 
-    define('DEFAULT_CONTROLLER','sexshop');
+    define('DEFAULT_CONTROLLER','usuarios');
 
-    define('DEFAULT_ACTION', 'todos');
+    define('DEFAULT_ACTION', 'formulario');
 
 
     $controller = DEFAULT_CONTROLLER;

@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+if(!isset($_SESSION["nombre"])){
+    header("location: ?controller=usuarios&action=formulario");
+}
+
 function todos(){
     require './models/sexshop_model.php';
 
@@ -19,9 +25,7 @@ function unicoElemento(){
 
 function insertar(){
     require './models/sexshop_model.php';
-
-    $action = "index.php/controller=sexshop&action=insertar";
-
+    $action = htmlentities($_SERVER['PHP_SELF']);
     $sexshop = [];
     $sexshop["id"] = "";
     $sexshop["nombreProducto"]="";
@@ -56,38 +60,25 @@ function insertar(){
         $imagen = $_FILES["imagen"]["name"];
         
 
-        $directorioImagen = "images/";
-        $archivoImagen = $directorioImagen . basename($_FILES["imagen"]["name"]);
-        $uploadOk=1;
-        $tipoImagen = strtolower(pathinfo($archivoImagen,PATHINFO_EXTENSION));
-
-        if(empty($_FILES["imagen"]["tmp_name"])){
-            $errorInsercion = "Error, selecciona imagen.";
-        }else {
-            $check = getimagesize($_FILES["imagen"]["tmp_name"]);
-            if($check !== false){
-                $uploadOk = 1;
-            } else {
-                $uploadOk = 0;
+        $target_file = basename($_FILES["avatar"]["name"]);
+        $imagen = getimagesize($_FILES["avatar"]["tmp_name"]);
+        if ($imagen !== false) {
+            echo "File is an image - " . $imagen["mime"] . ".";
+            $new_file = $target_file;
+            if (!move_uploaded_file($_FILES["avatar"]["tmp_name"], 'images/' . $new_file)) {
+                echo "ERROR IMAGE";
             }
-            
 
-            if ($uploadOk == 0) {
-                $errorInsercion = "Error, seleccione una imagen";
-              
-              } else {
-                if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivoImagen)) {
-                    $juguetes = insertaElemento($nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
-                } else {
-                  $errorInsercion = "Lo sentimos, ha ocurrido un error en la subida de imagen.";
-                }
-            }
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
-        
-       header("location: sexshop_view.php");
+
+        $juguetes = insertaElemento($nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
+        header("Location: index.php");
     }
 
-    
     include './views/editSexshop_view.php';
 
 }
@@ -98,7 +89,7 @@ function delete(){
     $id = $_GET['id'];
         
     $juguetes = eliminarElemento($id);
-    header("location: ?action=todos");
+    header("location: ?controller=sexshop&action=todos");
     
     include './views/sexshop_view.php';
 }
@@ -107,8 +98,7 @@ function update(){
     require './models/sexshop_model.php';
 
     $id = $_GET['id'];
-    $action = "index.php/controller=sexshop&action=update?id=$id";
-   
+    $action = htmlentities($_SERVER['PHP_SELF'] . "?id=$id");
     $sexshop = obtenerElemento($id);
     $imagen = $sexshop['imagen'];
 
@@ -143,34 +133,20 @@ function update(){
         $fechaCreacionProducto = $_POST["fechaCreacionProducto"];
         
 
-        $directorioImagen = "images/";
-        $archivoImagen = $directorioImagen . basename($_FILES["imagen"]["name"]);
-        $uploadOk=1;
-
-        if(empty($_FILES["imagen"]["tmp_name"])){
-            
-            $imagen = $sexshop['imagen'];
-            //$id=editarElemento($id,$nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
-            // if($id){
-            //     $id = $_POST["id"];
-            //     header("location: view.php?id=$id");
-            // } else {
-            //        $errorInsercion = "Error de inserción";
-            // }
-        }else {
-
-            if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivoImagen)) {
-                $imagen = $_FILES["imagen"]["name"];
-                $juguetes = editarElemento($id,$nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen);
-    
-                if($juguetes){
-                    
-                    header("location: ?action=todos");
-                } else {
-                       $errorInsercion = "Error de inserción";
-                }
+        if ($_FILES["avatar"]["size"] != 0) {
+            $target_dir = "images/";
+            $target_file = basename($_FILES["avatar"]["name"]);
+            $timestamp = time();
+            $new_file = $timestamp . $target_file;
+            if (editarElemento($id,$nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen)) {
+                move_uploaded_file($_FILES["avatar"]["tmp_name"], 'images/' . $new_file);
+                header("Location: index.php");
+            }
+        } else {
+            if (editarElemento($id,$nombreProducto,$modelo,$descripcion,$precio,$stock,$fechaCreacionProducto,$imagen)) {
+                header("Location: index.php");
             } else {
-                $errorInsercion = "Lo sentimos, ha ocurrido un error en la subida de imagen.";
+                $errorInsercion = "NO SE HA MODIFICADO NINGÚN CAMPO";
             }
         }
     }
@@ -178,7 +154,4 @@ function update(){
     include './views/editSexshop_view.php';
 }
 
-function formulario(){
-
-}
 ?>

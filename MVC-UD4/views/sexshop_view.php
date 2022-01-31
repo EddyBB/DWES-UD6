@@ -11,9 +11,10 @@
 <body>
     <nav>
         <ul>
-            <li><a href="?action=todos">Página principal</a></li>
-            <li><a href="?action=insertar">Nuevo elemento</a></li>
-            <li><a class="active" href="?action=todos">Lista elementos</a></li>
+            <li><a href="?controller=usuarios&action=formulario">Página principal</a></li>
+            <li><a href="?controller=sexshop&action=insertar">Nuevo elemento</a></li>
+            <li><a class="active" href="?controller=sexshop&action=todos">Lista elementos</a></li>
+            <li><a href="?controller=usuarios&action=cerrarSesion">Cerrar Sesión</a></li>
 
         </ul>
     </nav>
@@ -40,9 +41,9 @@
                     echo "<td>$producto[modelo]</td>";
                     echo "<td>$producto[precio]</td>";
                     echo "<td>$producto[fechaCreacionProducto]</td>";
-                    echo "<td><a href='?action=unicoElemento&id=$producto[id]'>Detalles</a></td>";
-                    echo "<td><a href='?action=update&id=$producto[id]'>Editar</a></td>";
-                    echo "<td><a href='?action=delete&id=$producto[id]'>Borrar</a></td>";
+                    echo "<td><a href='?controller=sexshop&action=unicoElemento&id=$producto[id]'>Detalles</a></td>";
+                    echo "<td><a href='?controller=sexshop&action=update&id=$producto[id]'>Editar</a></td>";
+                    echo "<td><a href='?controller=sexshop&action=delete&id=$producto[id]'>Borrar</a></td>";
                     echo "</tr>";
                 }
             ?>
